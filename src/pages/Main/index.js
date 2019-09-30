@@ -8,6 +8,11 @@ class Main extends React.Component{
   constructor(props) {
     super(props);
     this.state = {
+      keyword: '',
+      checkedItems:{
+        stations: [],
+        tags: []
+      },
       locations:[
         {
           MRT: '西湖',
@@ -73,19 +78,20 @@ class Main extends React.Component{
           ]
         }
       ]
-    }
+    };
+
   }
   
-  componentWillMount(){
-    window.scrollTo(0, 0);
-  }
 
   render(){
     return(
       <div id="app" class="min-h-screen bg-gray-200 antialiased xl:flex xl:flex-col xl:h-slocacreen">
         <Header />
         <div class="xl:flex-1 xl:flex xl:overflow-y-hidden">
-          <SearchFilter />
+          <SearchFilter 
+              tags={ this.state.checkedItems.tags } 
+              stations={ this.state.checkedItems.stations }
+          />
 
           <main class="py-6 xl:flex-1 xl:overflow-x-hidden">
             {
@@ -120,5 +126,6 @@ class Main extends React.Component{
   }
 
 }
+
 
 export default Main;
