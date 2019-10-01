@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { actions } from '../../redux/Module/searchModule';
+import { searchActions } from '../../redux/Module/searchModule';
 import { bindActionCreators } from 'redux';
 
 class CheckboxContainer extends React.Component {
@@ -46,14 +46,14 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   
   if(ownProps.criteria === "mrt"){
     return { 
-      addFilter: bindActionCreators(actions.addMrtFilter, dispatch),
-      delFilter: bindActionCreators(actions.delMrtFilter, dispatch)
+      addFilter: bindActionCreators(searchActions.addMrtFilter, dispatch),
+      delFilter: bindActionCreators(searchActions.delMrtFilter, dispatch)
     }
   } 
   else if(ownProps.criteria === "tag"){
     return { 
-      addFilter: bindActionCreators(actions.addTagFilter, dispatch),
-      delFilter: bindActionCreators(actions.delTagFilter, dispatch)
+      addFilter: bindActionCreators(searchActions.addTagFilter, dispatch),
+      delFilter: bindActionCreators(searchActions.delTagFilter, dispatch)
     }
   } 
 }

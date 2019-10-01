@@ -1,8 +1,8 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Header from '../../components/Header';
 import SearchFilter from '../../components/SearchFilter';
 import RamenCard from '../../components/RamenCard';
+import { connect } from 'react-redux';
 
 class Main extends React.Component{
   constructor(props) {
@@ -85,24 +85,24 @@ class Main extends React.Component{
 
   render(){
     return(
-      <div id="app" class="min-h-screen bg-gray-200 antialiased xl:flex xl:flex-col xl:h-slocacreen">
+      <div id="app" className="min-h-screen bg-gray-200 antialiased xl:flex xl:flex-col xl:h-screen">
         <Header />
-        <div class="xl:flex-1 xl:flex xl:overflow-y-hidden">
+        <div className="xl:flex-1 xl:flex xl:overflow-y-hidden">
           <SearchFilter 
               tags={ this.state.checkedItems.tags } 
               stations={ this.state.checkedItems.stations }
           />
 
-          <main class="py-6 xl:flex-1 xl:overflow-x-hidden">
+          <main className="py-6 xl:flex-1 xl:overflow-x-hidden">
             {
               this.state.locations.map((location, index) => {
               return(
                 <div>
-                  <div class="px-4 xl:px-8">
-                    <h3 class="text-gray-900 text-xl">{location.MRT}</h3>
+                  <div className="px-4 xl:px-8">
+                    <h3 className="text-gray-900 text-xl">{location.MRT}</h3>
                   </div>
-                  <div class="mt-6 sm:overflow-x-auto sm:overflow-y-hidden">
-                    <div class="px-4 sm:inline-flex sm:pt-2 sm:pb-8 xl:px-8">
+                  <div className="mt-6 sm:overflow-x-auto sm:overflow-y-hidden" >
+                    <div className="px-4 sm:inline-flex sm:pt-2 sm:pb-8 xl:px-8">
                       {
                         location.ramen.map((store, index) => {
                           return(
@@ -127,5 +127,10 @@ class Main extends React.Component{
 
 }
 
+const mapStateToProps = ( state ) => {
+  return{
+    storeList: state.ramen.storeList
+  }
+}
 
-export default Main;
+export default connect(mapStateToProps)(Main);

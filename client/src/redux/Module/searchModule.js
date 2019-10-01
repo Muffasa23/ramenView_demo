@@ -10,7 +10,7 @@ export const actionTypes= {
 };
 
 //action creators
-export const actions= {
+export const searchActions= {
   addMrtFilter: mrt => ({
     type: actionTypes.ADD_MRT_FILTER,
     mrt

@@ -5,19 +5,33 @@ const router = express.Router();
 const RamenModel = require('../../models/ramenInfo');
 
 /* 
-@route GET api/blogPost
-@desc  Get all posts
+@route GET api/ramenStore
+@desc  Get all stores by filter
 @access Public
 */
 
 router.get('/', (req, res) => {
-  RamenModel.find()
-    .then( items => res.json(items) );
+  searchCondition = {};  
+  const keyword = req.query.keyword;
+  const mrtFilter = req.query.mrtFilter;
+  const tagFilter = req.query.tagFilter;
+
+  if(keyword) searchCondition.name={ $regex: new RegExp(".*"+keyword+".*", "g") };
+  else searchCondition.name={ $regex: /.*/ };
+
+  if(mrtFilter === undefined || mrtFilter.length === 0) searchCondition.mrt={ $nin: mrtFilter };
+  else searchCondition.mrt={ $in: mrtFilter };
+
+  if(tagFilter === undefined || tagFilter.length === 0) searchCondition.tag, { $nin: tagFilter };
+  else searchCondition.tag={ $in: mrtFilter };
+
+  RamenModel.find(searchCondition)
+  .then( items => res.json(items) );
 });
 
 /* 
-@route POST api/blogPost
-@desc  create a post
+@route POST api/ramenStore
+@desc  create a store
 @access Public
 */
 router.post('/', (req, res) => {
