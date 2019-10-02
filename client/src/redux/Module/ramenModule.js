@@ -19,7 +19,6 @@ export const ramenActions = {
         }
       })
       .then(res => {
-        console.log(res.data);
         dispatch({
           type: actionsTypes.GET_STORE_LIST,
           payload: res.data
@@ -48,8 +47,21 @@ const reducer = (state = initialState, action) => {
       return{
         ...state,
         storeList: action.payload
-      }
+      };
   }
 };
 
+
 export default reducer;
+
+
+/* 
+.reduce(
+          (result, store) => {
+            result[store.mrt[0]] = result[store.mrt[0]] || [];
+            result[store.mrt[0]].push(store);
+            return result;
+          },
+          []
+        )
+*/

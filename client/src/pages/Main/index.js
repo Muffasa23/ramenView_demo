@@ -1,18 +1,69 @@
-import React from 'react';
+import React,{ useEffect, useCallback } from 'react';
 import Header from '../../components/Header';
 import SearchFilter from '../../components/SearchFilter';
 import RamenCard from '../../components/RamenCard';
-import { connect } from 'react-redux';
+import { connect,useSelector, useDispatch } from 'react-redux';
+import { ramenActions } from '../../redux/Module/ramenModule';
+import { bindActionCreators } from 'redux';
 
-class Main extends React.Component{
+const Main = (props) => {
+  
+  useEffect(() => {
+    props.getInitialDisplayList(["西湖","忠孝敦化","台北車站"],[],'');
+    
+  }, []);
+
+  return(
+    <div id="app" className="min-h-screen bg-gray-200 antialiased xl:flex xl:flex-col xl:h-screen">
+      <Header />
+      <div className="xl:flex-1 xl:flex xl:overflow-y-hidden">
+        <SearchFilter />
+
+        <main className="py-6 xl:flex-1 xl:overflow-x-hidden">
+                <div>
+                  <div className="px-4 xl:px-8">
+                    <h3 className="text-gray-900 text-xl">{  }</h3>
+                  </div>
+                  <div className="mt-6 sm:overflow-x-auto sm:overflow-y-hidden" >
+                    {/* <div className="px-4 sm:inline-flex sm:pt-2 sm:pb-8 xl:px-8">
+                      {
+                        categorizedByMrtResult[location].map((store, index) => {
+                          return(
+                            <div>
+                              <RamenCard store={store}/>
+                            </div>
+                          )                          
+                        })
+                      }                      
+                    </div> */}
+                  </div>
+                </div>
+          
+        </main>
+      </div>
+    </div>
+  )
+
+}
+
+const mapStateToProps = ( state ) => {
+  return{
+    storeList: state.ramen.storeList
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return { 
+    getInitialDisplayList: bindActionCreators(ramenActions.getStoreList, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Main); 
+
+/* 
   constructor(props) {
     super(props);
     this.state = {
-      keyword: '',
-      checkedItems:{
-        stations: [],
-        tags: []
-      },
       locations:[
         {
           MRT: '西湖',
@@ -80,57 +131,4 @@ class Main extends React.Component{
       ]
     };
 
-  }
-  
-
-  render(){
-    return(
-      <div id="app" className="min-h-screen bg-gray-200 antialiased xl:flex xl:flex-col xl:h-screen">
-        <Header />
-        <div className="xl:flex-1 xl:flex xl:overflow-y-hidden">
-          <SearchFilter 
-              tags={ this.state.checkedItems.tags } 
-              stations={ this.state.checkedItems.stations }
-          />
-
-          <main className="py-6 xl:flex-1 xl:overflow-x-hidden">
-            {
-              this.state.locations.map((location, index) => {
-              return(
-                <div>
-                  <div className="px-4 xl:px-8">
-                    <h3 className="text-gray-900 text-xl">{location.MRT}</h3>
-                  </div>
-                  <div className="mt-6 sm:overflow-x-auto sm:overflow-y-hidden" >
-                    <div className="px-4 sm:inline-flex sm:pt-2 sm:pb-8 xl:px-8">
-                      {
-                        location.ramen.map((store, index) => {
-                          return(
-                            <div>
-                              <RamenCard store={store}/>
-                            </div>
-                          )                          
-                        })
-                      }                      
-                    </div>
-                  </div>
-                </div>
-              )
-            })
-          }
-            
-          </main>
-        </div>
-      </div>
-    )
-  }
-
-}
-
-const mapStateToProps = ( state ) => {
-  return{
-    storeList: state.ramen.storeList
-  }
-}
-
-export default connect(mapStateToProps)(Main);
+  } */
