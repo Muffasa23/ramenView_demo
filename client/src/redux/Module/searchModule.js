@@ -34,7 +34,7 @@ export const searchActions= {
 };
 
 const initialState={
-  mrtFilter: [],
+  mrtFilter: ["西湖", "台北車站", "忠孝敦化"],
   tagFilter: [],
   keyword: ''
 };

@@ -15,7 +15,7 @@ const RamenCard = (props) => {
             <span className="inline-block px-2 py-1 leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs">Plus</span>
             <div className="ml-2 text-xs text-gray-600 font-semibold uppercase tracking-wide">
               { 
-                store.tags.map((tag, index) => {
+                store.tag.map((tag, index) => {
                   return (
                     <span> { tag } </span>
                   )
