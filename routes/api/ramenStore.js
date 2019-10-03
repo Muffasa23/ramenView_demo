@@ -23,7 +23,7 @@ router.get('/', (req, res) => {
   else searchCondition.mrt={ $in: mrtFilter };
 
   if(tagFilter === undefined || tagFilter.length === 0) searchCondition.tag, { $nin: tagFilter };
-  else searchCondition.tag={ $in: mrtFilter };
+  else searchCondition.tag={ $in: tagFilter };
 
   RamenModel.find(searchCondition)
   .then( items => res.json(items) );

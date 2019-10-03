@@ -26,6 +26,11 @@ const Main = (props) => {
     ); 
   }, [props.storeList]);
 
+  useEffect(() => {
+    props.delInitialState("西湖");
+    props.delInitialState("忠孝敦化");
+  }, []);
+
   return(
     <div id="app" className="min-h-screen bg-gray-200 antialiased xl:flex xl:flex-col xl:h-screen">
       <Header />
@@ -38,7 +43,9 @@ const Main = (props) => {
               return(
                 <div>
                   <div className="px-4 xl:px-8">
-                    <h3 className="text-gray-900 text-xl">{ location[0].mrt[0] }</h3>
+                    <h3 className="text-gray-900 text-xl">
+                      { location[0].mrt[0] }
+                    </h3>
                   </div>
                   <div className="mt-6 sm:overflow-x-auto sm:overflow-y-hidden" >
                     <div className="px-4 sm:inline-flex sm:pt-2 sm:pb-8 xl:px-8">
@@ -76,6 +83,7 @@ const mapStateToProps = ( state ) => {
 const mapDispatchToProps = (dispatch) => {
   return { 
     getInitialDisplayList: bindActionCreators(ramenActions.getStoreList, dispatch),
+    delInitialState: bindActionCreators(searchActions.delMrtFilter, dispatch)
   }
 }
 

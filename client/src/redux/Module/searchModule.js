@@ -34,7 +34,7 @@ export const searchActions= {
 };
 
 const initialState={
-  mrtFilter: ["西湖", "台北車站", "忠孝敦化"],
+  mrtFilter: ["西湖", "忠孝敦化"],
   tagFilter: [],
   keyword: ''
 };
@@ -46,7 +46,7 @@ const reducer = (state=initialState, action) => {
     case actionTypes.ADD_MRT_FILTER:
       return{
         ...state,
-        mrtFilter: [...state.mrtFilter, action.mrt ]
+        mrtFilter: [...state.mrtFilter, action.mrt]
       };
     case actionTypes.DEL_MRT_FILTER:
       return{
@@ -56,7 +56,7 @@ const reducer = (state=initialState, action) => {
     case actionTypes.ADD_TAG_FILTER:
       return{
         ...state,
-        tagFilter: [...state.tagFilter, action.tag ]
+        tagFilter: [...state.tagFilter, action.tag]
       };
     case actionTypes.DEL_TAG_FILTER:
       return{
