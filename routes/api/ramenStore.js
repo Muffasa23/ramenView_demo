@@ -11,6 +11,7 @@ const RamenModel = require('../../models/ramenInfo');
 */
 
 router.get('/', (req, res) => {
+  console.log('2');
   searchCondition = {};  
   const keyword = req.query.keyword;
   const mrtFilter = req.query.mrtFilter;
@@ -26,8 +27,22 @@ router.get('/', (req, res) => {
   else searchCondition.tag={ $in: tagFilter };
 
   RamenModel.find(searchCondition)
-  .then( items => res.json(items) );
+    .then( items => res.json(items) );
 });
+
+/* 
+@route GET api/ramenStore/:id
+@desc  Get certain store info
+@access Public
+*/
+
+router.get('/:id', (req, res) => {
+  console.log('1');
+
+  RamenModel.findById(req.params.id)
+    .then( items => res.json(items) );
+})
+
 
 /* 
 @route POST api/ramenStore

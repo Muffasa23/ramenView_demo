@@ -1,8 +1,10 @@
 import axios from 'axios';
 import qs from 'qs';
+import { actionTypes } from './searchModule';
 
 export const actionsTypes = {
-  GET_STORE_LIST: 'GET_STORE_LIST',  
+  GET_STORE_LIST: 'GET_STORE_LIST',
+  GET_STORE_INFO: 'GET_STORE_INFO'  
 };
 
 export const ramenActions = {  
@@ -23,20 +25,25 @@ export const ramenActions = {
           type: actionsTypes.GET_STORE_LIST,
           payload: res.data
         })}
-      ); 
-      
-      
-  } 
-  /* getStoreList: (mrtFilter, tagFilter) => {
-    return {
-      type: actionsTypes.GET_STORE_LIST,
-      payload: mrtFilter
-    }
-  } */
+      );  
+  },
+
+  getStoreInfo: (id) => dispatch => {
+    axios
+      .get(`/api/ramenStore/${id}`)
+      .then(res => {
+        console.log(res);
+        dispatch({
+          type: actionsTypes.GET_STORE_INFO,
+          payload: res.data
+        })
+      });
+  }
 };
 
 const initialState = {
-  storeList:[]
+  storeList: [],
+  storeInfo: {}
 };
 
 const reducer = (state = initialState, action) => {
@@ -47,6 +54,11 @@ const reducer = (state = initialState, action) => {
       return{
         ...state,
         storeList: action.payload
+      };
+    case actionsTypes.GET_STORE_INFO:
+      return{
+        ...state,
+        storeInfo: action.payload
       };
   }
 };

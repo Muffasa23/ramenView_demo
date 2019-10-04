@@ -12,6 +12,8 @@ module.exports = {
     colors: {
       transparent: 'transparent',
 
+      modal: 'rgba(74, 85, 104, 0.7)',
+
       black: '#000',
       white: '#fff',
 
@@ -146,6 +148,8 @@ module.exports = {
       '48': '12rem',
       '56': '14rem',
       '64': '16rem',
+      '80pc': '80%',
+      '70pc': '70%'
     },
     backgroundColor: theme => theme('colors'),
     backgroundPosition: {

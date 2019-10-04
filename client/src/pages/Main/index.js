@@ -1,4 +1,5 @@
-import React,{ useEffect, useCallback, useState } from 'react';
+import React,{ useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../../components/Header';
 import SearchFilter from '../../components/SearchFilter';
 import RamenCard from '../../components/RamenCard';
@@ -52,9 +53,9 @@ const Main = (props) => {
                       {
                         location.map((store, index) => {
                           return(
-                            <div>
-                              <RamenCard store={ store }/>
-                            </div>
+                              <Link to={`/store/${ store._id }`}>
+                                <RamenCard store={ store }/>
+                              </Link>
                           )
                         })
                       }

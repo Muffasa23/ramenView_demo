@@ -1,4 +1,7 @@
-import React,{ useState, useCallback } from 'react';
+import React,{ useState, useEffect, useCallback } from 'react';
+import { connect } from 'react-redux';
+import { ramenActions } from '../../redux/Module/ramenModule';
+import { bindActionCreators } from 'redux';
 
 const name = "麵屋武藏 本店";
 const mrt = "台北車站";
@@ -16,18 +19,24 @@ const openingHours = [
   "Friday: 11:30 AM – 2:00 PM, 5:30 – 7:00 PM",
   "Saturday: Closed",
   "Sunday: 11:30 AM – 2:00 PM"
-  ];
+];
+
 const today = new Date().toLocaleDateString('en-us', { weekday: 'long' });
 
-const StoreInfo = () => {
+const StoreInfo = (props) => {
   const [isOpen, toggleIsOpen] = useState(false);
 
   const toggleOpeningHours = useCallback(() => {
     toggleIsOpen(isOpen => !isOpen);
   }, []);
 
+  useEffect(() => {
+    props.getStoreInfo(props.storeId);
+    console.log("12345");
+  }, []);
+
   return(
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col">
       <div className="flex justify-between bg-indigo-300 sm:px-6 px-2 m-4 rounded ">
         
         <div className="flex flex-col flex-shrink sm:px-6 sm:py-6 px-2 py-2">
@@ -37,7 +46,7 @@ const StoreInfo = () => {
             {
               tag.map((tag, index) => {
                 return(
-                  <span className="mr-4 mb-2 inline-block px-3 py-2 leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-sm sm:text-xs">
+                  <span className="mr-4 mb-2 inline-block px-3 py-2 leading-none bg-teal-200 text-teal-800 rounded-full font-semibold uppercase tracking-wide text-xs sm:text-sm">
                     { tag }
                   </span>
                 )
@@ -87,9 +96,9 @@ const StoreInfo = () => {
                   <span className="mr-4">{ openingHours.find(day => day.includes(today)) }</span>
                   {
                     isOpen ? 
-                    (<svg onClick={ toggleOpeningHours } className="cursor-pointer stroke-current text-gray-600" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" ><polyline points="18 15 12 9 6 15"></polyline></svg>)
+                    (<svg onClick={ toggleOpeningHours } className="cursor-pointer stroke-current text-gray-600" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" ><polyline points="18 15 12 9 6 15"></polyline></svg>)
                     :
-                    (<svg onClick={ toggleOpeningHours } className="cursor-pointer stroke-current text-gray-600" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" ><polyline points="6 9 12 15 18 9"></polyline></svg>)
+                    (<svg onClick={ toggleOpeningHours } className="cursor-pointer stroke-current text-gray-600" viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" ><polyline points="6 9 12 15 18 9"></polyline></svg>)
                   }                  
                 </div>
                 
@@ -144,4 +153,16 @@ const StoreInfo = () => {
   );
 };
 
-export default StoreInfo;
+const mapStateToProps = (state) => {
+  return{
+    storeInfo: state.ramen.storeInfo
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return{
+    getStoreInfo: bindActionCreators( ramenActions.getStoreInfo, dispatch)
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(StoreInfo);
