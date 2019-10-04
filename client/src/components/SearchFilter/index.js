@@ -5,7 +5,7 @@ import { searchActions } from '../../redux/Module/searchModule';
 import { ramenActions } from '../../redux/Module/ramenModule';
 import { bindActionCreators } from 'redux';
 
-const tags = ["豚骨", "醬油", "味噌", "煮干", "家系", "鷄白湯", "沾麵", "拌麵"];
+const tags = ["豚骨", "醬油", "味噌", "煮干", "家系", "魚介", "鷄白湯", "沾麵", "拌麵"];
 const stations = ["台北車站","中山","市政府","國父紀念館","忠孝敦化","中正紀念堂","公館","古亭","台北小巨蛋","西湖"];
 
 const SearchFilter = (props) => {

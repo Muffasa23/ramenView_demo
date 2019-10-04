@@ -12,10 +12,10 @@ const ramenInfoSchema = new Schema({
     type: String,
     required: true
   },
-  mrt:[{
+  mrt:{
     type: String,
     required: true
-  }],
+  },
   website:{
     type: String,
     required: true
@@ -39,7 +39,11 @@ const ramenInfoSchema = new Schema({
   imageURL:{
     type: String,
     required: true
-  }
+  },
+  openingHours:[{
+    type: String,
+    required: true
+  }]
 });
 
 module.exports = RamenInfo = mongoose.model('rameninfo', ramenInfoSchema);

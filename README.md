@@ -4,7 +4,7 @@
 
 ### Todo
 1. 點進拉麵店時不換頁，顯示modal和疊新的page上去，同時配置react-router
-2. 404頁面/loader
+2. 404頁面 / loader
 3. 加入pagination與相關的state
 4. login相關功能, facebook api
 
@@ -36,7 +36,7 @@ proxy設在`/client`的`package.json`中，`http://localhost:6000`
 3. RamenCard: 主畫面顯示搜尋結果，預設也會顯示一些拉麵店
 4. CheckboxContainer: 保管兩組filter, tag & mrt
 
-首頁會抓取西湖、台北車站、忠孝敦化這幾站的拉麵顯示
+首頁會抓取西湖、忠孝敦化這幾站的拉麵顯示
 會因RWD而稍有變更，目前只有一個Page
 
 #### action

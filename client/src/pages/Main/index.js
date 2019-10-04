@@ -8,8 +8,8 @@ import { searchActions } from '../../redux/Module/searchModule';
 import { bindActionCreators } from 'redux';
 
 const Main = (props) => {
-  const [groupedStoreList, group]=useState([]);
-
+  const [groupedStoreList, group] = useState([]);
+  
   useEffect(() => {
     props.getInitialDisplayList(props.mrtFilter, props.tagFilter, props.keyword); 
   }, []);
@@ -44,7 +44,7 @@ const Main = (props) => {
                 <div>
                   <div className="px-4 xl:px-8">
                     <h3 className="text-gray-900 text-xl">
-                      { location[0].mrt[0] }
+                      { location[0].mrt }
                     </h3>
                   </div>
                   <div className="mt-6 sm:overflow-x-auto sm:overflow-y-hidden" >
